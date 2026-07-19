@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สถิติ — Eyewitness Cam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand">Eyewitness Cam</div>
+  <div class="nav-links">
+    <a href="index.html" class="">หน้าแรก</a>
+    <a href="ishihara.html" class="">ทดสอบ</a>
+    <a href="camera.html" class="">กล้อง</a>
+    <a href="stats.html" class="active">สถิติ</a>
+  </div>
+</nav>
+
+<div class="view active" id="view-stats">
+  <div class="title-stack" style="text-align:left; align-self:flex-start; margin-bottom:8px;">
+    <span class="eyebrow">Booth Dashboard</span>
+    <h1>สถิติและแกลเลอรีภาพ</h1>
+    <p class="sub">ภาพรวมของภาพที่ถ่ายในแต่ละโหมดการมองเห็น พร้อมค้นหาและแก้ไขคำอธิบายจาก AI</p>
+  </div>
+
+  <div class="controls-panel">
+    <select id="filterMode" class="filter-select">
+      <option value="">ทุกโหมด</option>
+      <option value="0">Normal Vision</option>
+      <option value="1">Protanopia</option>
+      <option value="2">Deuteranopia</option>
+      <option value="3">Tritanopia</option>
+    </select>
+    <input id="searchBox" class="search-input" placeholder="ค้นหาในคำอธิบาย...">
+  </div>
+
+  <div class="stats-summary" id="statsCard">
+    <div class="stat-card"><div class="status">กำลังโหลดข้อมูล...</div></div>
+  </div>
+
+  <div class="gallery" id="gallery"></div>
+</div>
+
+<footer>You Sight Lab — เติมเต็มความเข้าใจผ่านมุมมองที่ต่างกัน</footer>
+
+<!-- Detail / Edit Overlay -->
+<div class="overlay" id="detailOverlay">
+  <div class="card" style="max-width:420px;">
+    <img id="detailImg" alt="รายละเอียดภาพ" style="width:100%;">
+    <div class="label">รายละเอียด</div>
+    <div class="status" id="detailMeta" style="text-align:left; margin:2px 0 14px;"></div>
+    <div class="caption" id="detailCaptionView" style="margin-bottom:18px;"></div>
+    <textarea id="detailCaptionEdit" style="display:none; width:100%; min-height:110px;"></textarea>
+    <div class="card-btn-group" style="margin-bottom:10px;">
+      <button class="btn btn-secondary" id="editCaptionBtn">แก้ไขคำอธิบาย</button>
+      <button class="btn btn-primary" id="saveCaptionBtn" style="display:none;">บันทึกการแก้ไข</button>
+      <button class="btn btn-danger" id="deleteRecordBtn">ลบรายการ</button>
+    </div>
+    <button class="close-btn" id="closeDetailBtn">ปิดหน้าต่างนี้</button>
+  </div>
+</div>
+
+<!-- Confirm Modal (replaces native confirm()) -->
+<div class="overlay" id="confirmOverlay">
+  <div class="card confirm-card">
+    <div class="label" style="color:var(--danger);">คำเตือน</div>
+    <h2 id="confirmTitle">ยืนยันการลบรายการ</h2>
+    <p id="confirmMessage" class="status">การลบไม่สามารถย้อนกลับได้ ต้องการลบรายการนี้ใช่ไหมคะ</p>
+    <div class="card-btn-group">
+      <button class="btn btn-secondary" id="confirmCancelBtn">ยกเลิก</button>
+      <button class="btn btn-danger-solid" id="confirmOkBtn">ลบเลย</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast (replaces native alert()) -->
+<div class="toast" id="toast"></div>
+
+<script src="js/config.js"></script>
+<script src="js/stats.js"></script>
+</body>
+</html>

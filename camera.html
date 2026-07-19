@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>โหมดกล้อง — Eyewitness Cam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand">Eyewitness Cam</div>
+  <div class="nav-links">
+    <a href="index.html" class="">หน้าแรก</a>
+    <a href="ishihara.html" class="">ทดสอบ</a>
+    <a href="camera.html" class="active">กล้อง</a>
+    <a href="stats.html" class="">สถิติ</a>
+  </div>
+</nav>
+
+<div class="view active" id="view-camera">
+    <div class="camera-stage">
+
+      <!-- Viewfinder — fixed, selectable aspect ratio -->
+      <div class="camera-frame" id="cameraFrame" data-ratio="1-1">
+        <video id="video" autoplay playsinline muted></video>
+        <canvas class="gl" id="glcanvas"></canvas>
+        <div class="flash" id="flash"></div>
+        <div class="viewfinder-corner tl"></div>
+        <div class="viewfinder-corner tr"></div>
+        <div class="viewfinder-corner bl"></div>
+        <div class="viewfinder-corner br"></div>
+
+        <div class="camera-top-ctrl">
+          <div class="mode-tag" id="modeTag"><span class="dot"></span>Normal Vision</div>
+        </div>
+      </div>
+
+      <!-- Control Panel — below the frame, not overlaid on it -->
+      <div class="camera-controls-panel">
+
+        <!-- Aspect Ratio Selector -->
+        <div class="ratio-switch" id="ratioSwitch">
+          <div class="ratio-btn" data-ratio="3-4">3∶4</div>
+          <div class="ratio-btn active" data-ratio="1-1">1∶1</div>
+          <div class="ratio-btn" data-ratio="16-9">16∶9</div>
+        </div>
+
+        <!-- Mode Selector -->
+        <div class="pills" id="pills">
+          <div class="pill active" data-mode="0">Normal</div>
+          <div class="pill" data-mode="1">Protanopia</div>
+          <div class="pill" data-mode="2">Deuteranopia</div>
+          <div class="pill" data-mode="3">Tritanopia</div>
+        </div>
+
+        <!-- Shutter Section -->
+        <div class="shutter-row">
+          <button class="shutter" id="shutterBtn" aria-label="ถ่ายภาพ">
+            <div class="shutter-inner"></div>
+          </button>
+          <div class="status" id="status">แตะเพื่อถ่ายภาพ แล้วให้ AI อธิบายสิ่งที่เห็น</div>
+
+          <!-- AI Loading -->
+          <div class="loading-container status" id="aiProgressContainer">
+            <div class="loading-bar-bg">
+              <div class="loading-bar-fill" id="aiProgressBar"></div>
+            </div>
+            <div class="loading-text" style="display:flex; justify-content:space-between; margin-top: 5px;">
+              <span>AI กำลังประมวลผล...</span>
+              <span id="aiProgressText">0%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay/Result Card (ปรับ Class ปุ่ม) -->
+  <div class="overlay" id="overlay">
+    <div class="card">
+      <img id="snapImg" alt="ภาพที่ถ่าย">
+      <div class="label" id="resultLabel">คำอธิบายจาก AI...</div>
+      <div class="caption" id="resultCaption"><span>▍</span></div>
+      <button class="close-btn" id="closeBtn">ลองถ่ายภาพอื่นใหม่</button>
+    </div>
+  </div>
+  
+
+  <script src="js/config.js"></script>
+  <script src="js/camera.js"></script>
+</body>
+</html>

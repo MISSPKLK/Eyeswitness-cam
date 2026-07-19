@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ทดสอบตาบอดสี — Eyewitness Cam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand">Eyewitness Cam</div>
+  <div class="nav-links">
+    <a href="index.html" class="">หน้าแรก</a>
+    <a href="ishihara.html" class="active">ทดสอบ</a>
+    <a href="camera.html" class="">กล้อง</a>
+    <a href="stats.html" class="">สถิติ</a>
+  </div>
+</nav>
+
+<div class="view active" id="view-ishihara">
+  <div class="title-stack">
+    <span class="eyebrow">Mini Ishihara Test</span>
+    <h1>เห็นเลขอะไรในวงกลม?</h1>
+  </div>
+
+  <div class="test-layout">
+    <!-- จานสี -->
+    <div class="plate-container">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+      <div class="plate-wrap"><canvas id="plateCanvas" width="360" height="360"></canvas></div>
+      <div class="plate-index" id="plateIndex">แผ่น 01 / 04</div>
+    </div>
+    
+    <!-- ส่วนอินพุต (ความคืบหน้า + ปุ่มกด) -->
+    <div class="input-container">
+      <div class="input-header">
+        <div class="progress" id="progress"></div>
+        <div class="level-badge" id="levelBadge">ระดับ: ง่าย</div>
+      </div>
+      
+      <div class="keypad" id="keypad">
+        <!-- JS จะสร้างปุ่ม .key ใส่ตรงนี้ -->
+      </div>
+      
+      <p class="sub" style="margin-top:25px;font-size:13px; text-align: center;">แบบทดสอบสาธิตสั้นๆ ออกแบบมาเพื่อให้เข้าใจมุมมองเบื้องต้น ไม่ใช่การวินิจฉัยทางการแพทย์นะคะ</p>
+    </div>
+  </div>
+</div>
+
+<!-- ส่วน #view-ishihara-result (ปรับ Class ปุ่มนิดหน่อย) -->
+<div class="view" id="view-ishihara-result">
+  <div class="panel" style="text-align:center;">
+    <span class="eyebrow">ผลเบื้องต้นของคุณ</span>
+    <h1 id="ishiharaResultTitle" style="font-size:24px;">-</h1>
+    <p class="sub" id="ishiharaResultDesc" style="color: var(--ink); margin-bottom: 25px;"></p>
+    <button class="btn btn-primary" id="toCameraBtn">เปิดโหมดกล้อง</button>
+  </div>
+</div>
+
+<footer>Blue Lab — เติมเต็มความเข้าใจผ่านมุมมองที่ต่างกัน</footer>
+<script src="js/ishihara.js"></script>
+</body>
+</html>

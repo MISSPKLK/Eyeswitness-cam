@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eyewitness Cam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand">Eyewitness Cam</div>
+  <div class="nav-links">
+    <a href="index.html" class="active">หน้าแรก</a>
+    <a href="ishihara.html" class="">ทดสอบ</a>
+    <a href="camera.html" class="">กล้อง</a>
+    <a href="stats.html" class="">สถิติ</a>
+  </div>
+</nav>
+
+<div class="view active" id="view-intro">
+    <div class="title-stack">
+      <span class="eyebrow">Empathy through pixels</span>
+      <h1>Eyewitness</h1>
+      <p class="sub">ทดสอบตาบอดสีแบบย่อ แล้วดูกล้องจำลองว่าคนกลุ่มนั้นเห็นภาพตรงหน้าคุณต่างไปยังไง พร้อม AI อธิบายกลไกการมองเห็นสีให้เข้าใจง่ายขึ้น</p>
+    </div>
+    
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="window.location.href='ishihara.html'">เริ่มทดสอบเลย</button>
+      <button class="linklike" onclick="sessionStorage.setItem('ishiharaResultMode', 0); window.location.href='camera.html'">ข้ามการทดสอบ ไปโหมดกล้อง</button>
+    </div>
+  </div>
+<footer>Blue Lab — เติมเต็มความเข้าใจผ่านมุมมองที่ต่างกัน</footer>
+</body>
+</html>
