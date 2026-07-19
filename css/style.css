@@ -579,3 +579,31 @@ a:focus-visible, button:focus-visible, .key:focus-visible, .pill:focus-visible, 
 }
 .cam-switch-btn:hover { background: rgba(10,15,28,0.75); }
 .cam-switch-btn:active { transform: scale(0.92); }
+
+/* --- Toast notification --- */
+.toast {
+  position: fixed; left: 50%; bottom: 28px;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--ink); color: #fff;
+  font-family: var(--font-body); font-size: 14px; font-weight: 500;
+  padding: 13px 22px; border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 3000; max-width: 90vw; text-align: center;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.success { background: #1F7A45; }
+.toast.error { background: var(--danger); }
+
+/* --- Confirm modal card --- */
+.confirm-card { max-width: 380px; text-align: center; }
+.confirm-card h2 { font-family: var(--font-display); font-size: 20px; margin: 6px 0 10px; }
+.confirm-card .status { margin-bottom: 22px; }
+.confirm-card .card-btn-group .btn { flex: 1; }
+
+.btn-danger-solid {
+  background-color: var(--danger); color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.btn-danger-solid:hover { background-color: #8A1F17; box-shadow: var(--shadow-md); }
