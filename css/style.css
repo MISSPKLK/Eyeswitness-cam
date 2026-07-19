@@ -566,3 +566,16 @@ a:focus-visible, button:focus-visible, .key:focus-visible, .pill:focus-visible, 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+/* --- Camera switch (front/back) button --- */
+.cam-switch-btn {
+  position: absolute; right: 16px; top: 0;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(10,15,28,0.55); backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff; font-size: 17px; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 11; transition: background 0.15s ease;
+}
+.cam-switch-btn:hover { background: rgba(10,15,28,0.75); }
+.cam-switch-btn:active { transform: scale(0.92); }

@@ -85,15 +85,36 @@ function resizeCanvas(){
 }
 window.addEventListener('resize', resizeCanvas);
 
-async function startCamera(){
+// --- Camera stream handling (supports switching front/back camera) ---
+let currentStream = null;
+let currentFacing = 'environment';
+const switchCamBtn = document.getElementById('switchCamBtn');
+
+async function startCamera(facing){
+  facing = facing || currentFacing;
   try{
-    const stream = await navigator.mediaDevices.getUserMedia({ video:{facingMode:'environment'}, audio:false });
+    // stop the previous stream's tracks before requesting a new one,
+    // otherwise some browsers keep the old camera locked/busy
+    if(currentStream){
+      currentStream.getTracks().forEach(t => t.stop());
+    }
+    const stream = await navigator.mediaDevices.getUserMedia({ video:{facingMode:facing}, audio:false });
+    currentStream = stream;
+    currentFacing = facing;
     video.srcObject = stream; await video.play();
     resizeCanvas(); requestAnimationFrame(render);
-  }catch(e){ 
-    statusEl.textContent = 'ไม่สามารถเปิดกล้องได้ รบกวนอนุญาตสิทธิ์การเข้าถึงกล้องก่อนนะคะ'; 
+  }catch(e){
+    statusEl.textContent = 'ไม่สามารถเปิดกล้องได้ รบกวนอนุญาตสิทธิ์การเข้าถึงกล้องก่อนนะคะ';
   }
 }
+
+if(switchCamBtn){
+  switchCamBtn.addEventListener('click', () => {
+    const next = currentFacing === 'environment' ? 'user' : 'environment';
+    startCamera(next);
+  });
+}
+
 function render(){
   if(video.readyState >= video.HAVE_CURRENT_DATA){
     gl.bindTexture(gl.TEXTURE_2D, tex);
@@ -110,15 +131,15 @@ shutterBtn.addEventListener('click', async () => {
   snapImg.src = dataUrl;
   resultCaption.innerHTML = '<span>▍</span>';
   document.getElementById('resultLabel').textContent = 'AI วิเคราะห์ (' + modeNames[currentMode] + ')...';
-  
+
   shutterBtn.disabled = true;
   statusEl.style.display = 'none';
-  
+
   // Start simulated loading bar
   aiProgressContainer.style.display = 'block';
   aiProgressBar.style.width = '0%';
   aiProgressText.textContent = '0%';
-  
+
   let progress = 0;
   const loadInterval = setInterval(() => {
     if (progress < 90) {
@@ -137,12 +158,12 @@ shutterBtn.addEventListener('click', async () => {
       body: JSON.stringify({ modeName: modeNames[currentMode], imageBase64: base64 })
     });
     const data = await response.json();
-    
+
     // Complete loading bar
     clearInterval(loadInterval);
     aiProgressBar.style.width = '100%';
     aiProgressText.textContent = '100%';
-    
+
     setTimeout(() => {
       overlay.classList.add('show');
       aiProgressContainer.style.display = 'none';
@@ -157,7 +178,7 @@ shutterBtn.addEventListener('click', async () => {
     }
     captionText = (data.caption || '').trim();
     renderCaption(resultCaption, captionText || 'ไม่มีคำตอบกลับจาก AI ค่ะ ลองถ่ายใหม่อีกภาพนึงนะคะ');
-    
+
   }catch(e){
     console.error('caption fetch failed:', e);
     clearInterval(loadInterval);
