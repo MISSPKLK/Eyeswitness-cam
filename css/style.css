@@ -607,3 +607,8 @@ a:focus-visible, button:focus-visible, .key:focus-visible, .pill:focus-visible, 
   box-shadow: var(--shadow-sm);
 }
 .btn-danger-solid:hover { background-color: #8A1F17; box-shadow: var(--shadow-md); }
+
+.nav-brand { display: flex; align-items: center; gap: 8px; }
+.brand-icon { width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0; }
+
+.hero-icon { width: 56px; height: 56px; border-radius: 14px; margin-bottom: 18px; }
