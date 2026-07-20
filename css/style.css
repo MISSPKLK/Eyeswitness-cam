@@ -69,13 +69,6 @@ body {
   color: var(--ink); letter-spacing: 0.02em;
   display: flex; align-items: center; gap: 10px;
 }
-.nav-brand::before {
-  content: "";
-  width: 9px; height: 9px;
-  border: 1.5px solid var(--primary);
-  transform: rotate(45deg);
-  flex-shrink: 0;
-}
 
 .nav-links {
   display: flex; gap: 2px;
